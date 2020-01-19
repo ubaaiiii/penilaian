@@ -222,7 +222,7 @@
             // console.log(kirimData);
             $('#field-karyawan').attr('disabled',true);
 						$('#field-karyawan select').attr('disabled',true);
-            $('#submit').html("<i class='fa fa-spinner fa-pulse'></i> Loading...");
+            $('#submit').html("<i class='fa fa-spinner fa-pulse'></i> Processing...");
             $.ajax({
                 url: "<?=base_url('proses/simpan/karyawan');?>",
                 type:"post",
@@ -230,7 +230,16 @@
                 success: function(data1){
                     var datanya1 = JSON.parse(data1);
 										// console.log(datanya1);
-                    if(datanya1.hasil==="adaUsername"){
+										if(datanya1.hasil==="adaUsernames"){
+                        Swal.fire(
+                          'Cancelled',
+                          'Username <strong>'+$('#username').val()+'</strong> sudah digunakan!',
+                          'error'
+                        );
+												$('#field-karyawan').attr('disabled',false);
+												$('#field-karyawan select').attr('disabled',false);
+						            $('#submit').html("Save");
+                    } else if(datanya1.hasil==="adaUsername"){
                         Swal.fire(
                           'Cancelled',
                           'Karyawan <strong>'+nama2+'</strong> sudah ada!',
@@ -248,7 +257,7 @@
 												$('#field-karyawan').attr('disabled',false);
 												$('#field-karyawan select').attr('disabled',false);
 												$('#submit').html("Save");
-                    } else if(datanya1.hasil==="success"){
+                    } else {
                         var datanya = JSON.parse(data1);
 												// console.log(datanya);
                         Swal.fire(
@@ -279,6 +288,7 @@
             e.preventDefault();
             var nik2 = $('#nik').val();
             var nama2 = $('#nama').val();
+						$('#delete').html("<i class='fa fa-spinner fa-pulse'></i> Processing...");
             Swal.fire({
               title: 'Yakin ingin menghapus?',
               html: "Data <strong>"+nama2+"</strong> tidak akan dapat dikembalikan!",
@@ -289,6 +299,8 @@
               reverseButtons: true
             }).then((result) => {
               if (result.value) {
+								$('#field-karyawan').attr('disabled',true);
+								$('#field-karyawan select').attr('disabled',true);
                 $.ajax({
                     url: "<?=base_url('proses/simpan/karyawan');?>",
                     type:"post",
@@ -300,15 +312,14 @@
                           'success'
                         );
                         $('#table-karyawan').DataTable().ajax.reload();
-                        $('.theme-loader').fadeOut('slow', function() {
-                            $(this).hide();
-                        });
+												$('#large-Modal').modal('hide');
                     }
                 });
               } else if (
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
               ) {
+								$('#delete').html("Delete");
                 Swal.fire(
                   'Cancelled',
                   'Karyawan <strong>'+nik2+'</strong> tidak jadi dihapus :)',

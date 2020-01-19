@@ -119,7 +119,7 @@
             var form = document.getElementById(f);
             form.reset();
         }
-        
+
         function field_register(){
             $('#field-sign').css({display:"none"});
             $('#field-forgot').css({display:"none"});
@@ -153,7 +153,7 @@
             document.title="PT. Bina Dana Sejahtera - Forgot Password";
             hapus('form-sign');
         }
-        
+
         function new_password(){
             $('#field-sign').css({display:"none"});
             $('#field-register').css({display:"none"});
@@ -440,7 +440,7 @@
                         </form>
                         <!-- end of form -->
                 </div>
-                
+
                 <!-- end of col-sm-12 -->
             </div>
             <!-- end of row -->
@@ -491,7 +491,7 @@
 </div>
 <![endif]-->
     <!-- Warning Section Ends -->
-    
+
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="<?=base_url('vendor\jquery-slimscroll\js\jquery.slimscroll.js');?>"></script>
     <!-- modernizr js -->
@@ -518,7 +518,7 @@
     <!-- sweet alert js -->
     <script type="text/javascript" src="<?= base_url('vendor\sweetalert\js\sweetalert.min.js');?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
@@ -530,7 +530,7 @@
 
   $(document).ready(function(){
 
-    <?php 
+    <?php
         if(isset($forgot) && $forgot==true){
             echo "
                 $('#forgotLink').click();
@@ -575,8 +575,8 @@
     $('#form-forgot').submit(function(e){
         e.preventDefault();
         var emailR = $("#emailR").val();
-        var dataForgot = $(this).serialize(); 
-        // console.log(dataForgot);
+        var dataForgot = $(this).serialize();
+        console.log(dataForgot);
         $.ajax({
             url: "<?=base_url('forgot/generate');?>",
             type:"post",
@@ -633,16 +633,16 @@
             })
         }
     })
-    
+
 
     $('#form-register').submit(function(e){
         e.preventDefault();
         var agama = $('#agama option:selected').val();
-        
+
         var email = $('#email').val();
         var nama = $('#nama').val();
         nama = nama.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-            return letter.toUpperCase();    
+            return letter.toUpperCase();
         });
         var dataForm = "tipe=save&role=0&"+$(this).serialize();
         console.log(dataForm);
@@ -707,7 +707,7 @@
         placeholder: "Pilih salah satu .."
     });
 
-    <?php 
+    <?php
         if (isset($loginUlang) && $loginUlang=="stop"){
             echo "show_stack_custom_top('login');";
             $loginUlang = "ulang";

@@ -14,7 +14,7 @@ class Forgot extends CI_Controller {
 	}
 
 	public function index()
-	{	
+	{
 		$email = $this->input->get('email');
 		$kode = $this->input->get('kode');
 		if($this->db->get_where('list_karyawan',array('email'=>$email,'recovery'=>$kode))->row_array()){
@@ -40,13 +40,11 @@ class Forgot extends CI_Controller {
 			$this->db->where('email', $email);
 			$this->db->update('list_karyawan');
 
-			$data = array(
+			echo json_encode($data = array(
 				'nama'      =>  $datanya['nama'],
 				'kode'      =>  $kode,
-                'email'     =>  $datanya['email']
-			);
-
-			echo json_encode($data);
+        'email'     =>  $datanya['email']
+			));
 		} else {
 			echo json_encode(false);
 		}

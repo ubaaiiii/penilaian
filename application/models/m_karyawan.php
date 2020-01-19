@@ -24,13 +24,13 @@ class m_karyawan extends CI_Model
     function proses_karyawan()
     {
 
-        if ($this->input->get('tipe')=="save"){
-            $tanggal = substr($this->input->get('tanggalLahir'),8,2);
-            $bulan = substr($this->input->get('tanggalLahir'),5,2);
-            $tahun = substr($this->input->get('tanggalLahir'),0,4);
+        if ($this->input->post('tipe')=="save"){
+            $tanggal = substr($this->input->post('tanggalLahir'),8,2);
+            $bulan = substr($this->input->post('tanggalLahir'),5,2);
+            $tahun = substr($this->input->post('tanggalLahir'),0,4);
             $tanggalLahir2 = $tanggal."/".$bulan."/".$tahun;
 
-            $upper = strtoupper($this->input->get('nama'));
+            $upper = strtoupper($this->input->post('nama'));
             $kata = explode(" ",$upper,2);
             $username = "";
             $password = "";
@@ -41,7 +41,7 @@ class m_karyawan extends CI_Model
             $usernames = $username.$tanggal.$bulan;
             $password.= "@".$tanggal.$bulan."!";
             $cekUsername = $this->db->get_where('list_karyawan',array('username'=>$usernames))->row_array();
-            $cekEmail = $this->db->get_where('list_karyawan',array('email'=>$this->input->get('email')))->row_array();
+            $cekEmail = $this->db->get_where('list_karyawan',array('email'=>$this->input->post('email')))->row_array();
 
             if ($cekUsername!==null){
                 return array('hasil'=>'adaUsername');
@@ -50,27 +50,27 @@ class m_karyawan extends CI_Model
             } else {
 
                 $data = array(
-                    'nik'            => $this->input->get('nik'),
-                    'nama'           => ucwords($this->input->get('nama')),
-                    'jenisKelamin'   => $this->input->get('jenisKelamin'),
-                    'tanggalLahir'   => $this->input->get('tanggalLahir'),
-                    'agama'          => $this->input->get('agama'),
-                    'nomorHandphone' => $this->input->get('nomorHandphone'),
-                    'email'          => $this->input->get('email'),
-                    'alamat'         => $this->input->get('alamat'),
+                    'nik'            => $this->input->post('nik'),
+                    'nama'           => ucwords($this->input->post('nama')),
+                    'jenisKelamin'   => $this->input->post('jenisKelamin'),
+                    'tanggalLahir'   => $this->input->post('tanggalLahir'),
+                    'agama'          => $this->input->post('agama'),
+                    'nomorHandphone' => $this->input->post('nomorHandphone'),
+                    'email'          => $this->input->post('email'),
+                    'alamat'         => $this->input->post('alamat'),
                     'username'       => $usernames,
                     'password'       => $password,
-                    'role'           => $this->input->get('role')
+                    'role'           => $this->input->post('role')
                 );
                 $data2 = array(
-                    'nama'      =>  ucwords($this->input->get('nama')),
+                    'nama'      =>  ucwords($this->input->post('nama')),
                     'username'  =>  $usernames,
                     'password'  =>  $password,
-                    'email'     =>  $this->input->get('email')
+                    'email'     =>  $this->input->post('email')
                 );
 
                 // $this->load->view('send/mail?'.'nama='.$data['nama'].'&username='.$usernames.'&password='.$password.'&email='.$data['email'],null,TRUE);
-                $this->db->insert('list_nilai',array('nik'=>$this->input->get('nik')));
+                $this->db->insert('list_nilai',array('nik'=>$this->input->post('nik')));
                 $simpan = $this->db->insert('list_karyawan',$data);
 
                 if ($simpan==true){
@@ -85,7 +85,7 @@ class m_karyawan extends CI_Model
         } else if ($this->input->post('tipe')=="update"){
 
             $dataBaru = array(
-              'nama'          => $this->input->post('nama'),
+              'nama'          => ucwords($this->input->post('nama')),
               'jenisKelamin'  => $this->input->post('jenisKelamin'),
               'tanggalLahir'  => $this->input->post('tanggalLahir'),
               'email'         => $this->input->post('email'),
@@ -96,13 +96,21 @@ class m_karyawan extends CI_Model
               'password'        => $this->input->post('password'),
               'role'          => $this->input->post('role')
             );
-            $this->db->where('nik',$this->input->post('nik'));
-            $update = $this->db->update('list_karyawan',$dataBaru);
-            if ($update==true){
-                // return array('hasil'=>'success');
-                return array('hasil'=>'success');
-            } else {
-                return array('hasil'=>'failed');
+            $cekEmail = $this->db->get_where('list_karyawan',array('email'=>$this->input->post('email')))->row_array();
+            $cekUsername = $this->db->get_where('list_karyawan',array('username'=>$this->input->post('username')))->row_array();
+            if ($cekEmail !== null and $cekEmail['nik']!==$this->input->post('nik')){
+                return array('hasil'=>'adaEmail');
+            } else if ($cekUsername !== null and $cekUsername['nik']!==$this->input->post('nik')){
+                return array('hasil'=>'adaUsernames');
+            }else {
+                $this->db->where('nik',$this->input->post('nik'));
+                $update = $this->db->update('list_karyawan',$dataBaru);
+                if ($update==true){
+                    // return array('hasil'=>'success');
+                    return array('hasil'=>'success');
+                } else {
+                    return array('hasil'=>'failed');
+                }
             }
 
             // echo "update";
