@@ -219,7 +219,7 @@
                 var tipes = "update";
             }
 						var kirimData = "tipe="+tipes+"&"+$(this).serialize();
-            console.log(kirimData);
+            // console.log(kirimData);
             $('#field-karyawan').attr('disabled',true);
 						$('#field-karyawan select').attr('disabled',true);
             $('#submit').html("<i class='fa fa-spinner fa-pulse'></i> Loading...");
@@ -229,7 +229,7 @@
                 data: kirimData,
                 success: function(data1){
                     var datanya1 = JSON.parse(data1);
-										console.log(datanya1);
+										// console.log(datanya1);
                     if(datanya1.hasil==="adaUsername"){
                         Swal.fire(
                           'Cancelled',
@@ -250,7 +250,7 @@
 												$('#submit').html("Save");
                     } else if(datanya1.hasil==="success"){
                         var datanya = JSON.parse(data1);
-												console.log(datanya);
+												// console.log(datanya);
                         Swal.fire(
                           'Berhasil!',
                           'Data Karyawan <strong>'+nama2+'</strong> Telah Tersimpan!',
