@@ -38,6 +38,7 @@
         $namanya = $all_karyawans;
         echo "<script>
                 $('#delete').removeAttr('hidden');
+                $('#form-nilai select').attr('disabled',true);
               </script>";
     } else if ($sebagai=="view"){
 
@@ -138,7 +139,7 @@
             } else {
                 var tipes = "update";
             }
-            var dataForm = "tipe="+tipes+"&"+$('#form-nilai').serialize();
+            var dataForm = "tipe="+tipes+"&"+$(this).serialize();
             console.log($('#form-nilai').serialize());
             $.ajax({
                 url: "<?=base_url('proses/simpan/nilai');?>",
