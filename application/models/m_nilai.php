@@ -29,7 +29,7 @@ class m_nilai extends CI_Model
         $i = 1;
         foreach ($all_kriteria as $ak) {
             $opt = ($ak['atribut']=="BEN")?("max"):("min");
-            $sql .= "SELECT '{$ak['kode']}' AS `kriteria`, IF({$opt}(`{$ak['kode']}`)=0,1,{$opt}(`{$ak['kode']}`)) AS `pivot` FROM `list_nilai` ";
+            $sql .= "SELECT '{$ak['kode']}' AS `kriteria`, {$opt}(NULLIF(`{$ak['kode']}`,0)) AS `pivot` FROM `list_nilai` ";
             if ($i != $num_kriteria){
                 $sql .= "UNION ALL ";
             }
@@ -69,7 +69,7 @@ class m_nilai extends CI_Model
             }
 
             return $this->db->update('list_nilai',$data,array('nik'=>$this->input->post('nik')));
-
+            // return $data;
             // echo "update";
 
         }

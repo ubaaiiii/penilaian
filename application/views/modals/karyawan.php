@@ -28,6 +28,11 @@
                     }\n
                 </script>";
     } else if($sebagai=="editD") {
+			if ($karyawanNik['nik']==$nik){
+				echo "<script>
+                    $('#field-user').removeAttr('style');
+              </script>";
+			}
         echo "<script>
                     $('button#delete').removeAttr('hidden');
                     $('button#submit').html('Save Changes');
@@ -138,7 +143,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Username</label>
                             <div class="col-sm-9">
-                                <input id="username" readonly="" name="username" type="text" class="form-control" placeholder="Username" autocomplete="off">
+                                <input id="username" name="username" type="text" class="form-control" placeholder="Username" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -165,7 +170,7 @@
     </fieldset>
     <div class="modal-footer">
     	<button id="cancel" type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
-        <button hidden id="delete" type="button" class="btn btn-warning waves-effect" data-dismiss="modal">Delete</button>
+        <button hidden id="delete" type="button" class="btn btn-warning waves-effect">Delete</button>
     	<button id="submit" type="submit" class="btn btn-primary waves-effect waves-light ">Save</button>
     </div>
 </form>
@@ -283,9 +288,6 @@
               cancelButtonText: 'Tidak, batalkan!',
               reverseButtons: true
             }).then((result) => {
-                $('.theme-loader').fadeOut('slow', function() {
-                    $(this).show();
-                });
               if (result.value) {
                 $.ajax({
                     url: "<?=base_url('proses/simpan/karyawan');?>",

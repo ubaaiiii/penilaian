@@ -72,7 +72,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-9">
-                            <select id="nama" class="form-control selectd col-sm-12" required>
+                            <select id="nama" name="nama" class="form-control selectd col-sm-12" required>
                                 <option value="0" disabled selected>Nama Lengkap ..</option>
                                 <?php foreach($namanya as $akars): ?>
                                 <option value="<?=$akars['nama'];?>" value2="<?=$akars['nik'];?>"><?=$akars['nama'];?></option>
@@ -112,7 +112,7 @@
     </fieldset>
     <div class="modal-footer">
         <button id="cancel" type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
-        <button hidden id="delete" type="button" class="btn btn-warning waves-effect" data-dismiss="modal">Delete</button>
+        <button hidden id="delete" type="button" class="btn btn-warning waves-effect">Delete</button>
         <button hidden id="submit" type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
     </div>
 </form>
@@ -127,33 +127,43 @@
 
         $('#form-nilai').submit('click',function(e){
             e.preventDefault();
-            $("#field-nilai").prop('disabled',true);
             $("#form-nilai #submit").html("<i class='fa fa-spinner fa-pulse'></i> Processing...");
-            var nik2 = $('#nik').val();
+            var nik = $('#nik').val();
+            var nama = $('#nama').val();
             // console.log(list_nilai);
             var found = list_nilai.find(function(e){
-                return e.nik==nik2
+                return e.nik==nik
             });
             if (found==undefined){
                 var tipes = "save";
             } else {
                 var tipes = "update";
             }
-            var dataForm = "tipe="+tipes+"&"+$(this).serialize();
-            console.log($('#form-nilai').serialize());
+            var dataForm = "tipe="+tipes+"&nik="+nik+"&nama="+nama+"&"+$('#form-nilai').serialize();
+            // console.log(dataForm);
+            $('#form-nilai button').prop('disabled',true);
+            $("#field-nilai select").prop('disabled',true);
             $.ajax({
                 url: "<?=base_url('proses/simpan/nilai');?>",
                 type:"post",
                 data: dataForm,
                 success: function(data){
+                  if (data=="true"){
                     Swal.fire(
                       'Berhasil!',
                       'Data Nilai Yang Baru Telah Tersimpan!',
                       'success'
                     );
-                    console.log(data);
+                    $('#form-nilai button').prop('disabled',false);
                     $('#table-penilaian').DataTable().ajax.reload();
                     $('#large-Modal').modal('hide');
+                  } else {
+                    Swal.fire(
+                      'Gagal!',
+                      'Data Nilai Yang Baru Tidak Tersimpan!',
+                      'error'
+                    );
+                  }
                 }
             });
         });
@@ -161,23 +171,31 @@
         $('#delete').on('click',function(e){
             e.preventDefault();
             var datanya = "tipe=delete&"+$('#form-nilai').serialize();
-            $("#field-nilai").attr('disabled',true);
-            $("#form-nilai #submit").html("<i class='fa fa-spinner fa-pulse'></i> Processing...");
+            $("#form-nilai #delete").html("<i class='fa fa-spinner fa-pulse'></i> Processing...");
             var nik2 = $('#nik').val();
-            console.log(datanya);
+            // console.log("nik="+nik2+"&"+datanya);
+            $("#field-nilai").attr('disabled',true);
             $.ajax({
                 url: "<?=base_url('proses/simpan/nilai');?>",
                 type:"post",
-                data:datanya,
+                data: "nik="+nik2+"&"+datanya,
                 success: function(data){
+                  // console.log(data);
+                  if (data=="true"){
                     Swal.fire(
                       'Berhasil!',
                       'Data Nilai '+nik2+' Telah Dihapus!',
                       'success'
                     );
-                    console.log(data);
                     $('#table-penilaian').DataTable().ajax.reload();
-                    $('#large-modal').modal('hide');
+                    $('#large-Modal').modal('hide');
+                  } else {
+                    Swal.fire(
+                      'Gagal!',
+                      'Data Nilai '+nik2+' Tidak Dihapus!',
+                      'error'
+                    );
+                  }
                 }
             });
         });
