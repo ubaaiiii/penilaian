@@ -186,6 +186,7 @@
             $('#login-register').on('click',function(){
                 field_sign();
                 $('#logo').show();
+                $('#username').focus();
             });
 
             $('#forgotLink').on('click',function(){
@@ -203,10 +204,12 @@
             $('#registration').on('click',function(){
                 field_register();
                 $('#logo').hide();
+                $('#nama').focus();
             });
 
             $('#forgot-password').on('click',function(){
                 field_forgot();
+                $('#emailR').focus();
             });
 
             var today = new Date();
@@ -375,7 +378,7 @@
                                                     <div class="group-add-on">
                                                         <div class="radio radiofill radio-inline">
                                                             <label style="color:white;">
-                                                                <input required id="L" type="radio" name="jenisKelamin" value="L" checked=""><i class="helper"></i> Laki-Laki
+                                                                <input required id="L" type="radio" name="jenisKelamin" value="L"><i class="helper"></i> Laki-Laki
                                                             </label>
                                                         </div>
                                                         <div class="radio radiofill radio-inline">
@@ -530,6 +533,7 @@
             echo "
                 $('#forgotLink').click();
                 $('#emailRecovery').val('{$email}');
+                $('#new').focus();
                 ";
         }
     ?>
