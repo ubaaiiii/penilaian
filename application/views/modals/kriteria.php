@@ -63,16 +63,16 @@
 			                    <option value="COS">Cost (Lebih kecil lebih baik)</option>
 				            </select>
 		                </div>
-		            </div>			
+		            </div>
 				</div>
 			</div>
 		</div>
-	</fieldset>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
-		<button id="delete" hidden type="button" class="btn btn-warning waves-effect" data-dismiss="modal">Delete</button>
+		<button id="delete" hidden type="button" class="btn btn-warning waves-effect">Delete</button>
 		<button id="submit" type="submit" class="btn btn-primary waves-effect waves-light ">Save</button>
 	</div>
+</fieldset>
 </form>
 
 <script>
@@ -98,24 +98,38 @@
 			} else {
 				var tipes = "update";
 			}
-			// console.log(tipes)
-			// console.log($(this).serialize());
-			$('#submit').attr('disabled',true);
+			var datanya = "tipe="+tipes+"&"+$(this).serialize();
+			$('#submit').html("<i class='fa fa-spinner fa-pulse'></i> Processing...");
+			$('#field-kriteria').attr('disabled',true);
+			$('#field-kriteria select').attr('disabled',true);
+			// console.log(datanya);
 			$.ajax({
 				url: "<?=base_url('proses/simpan/kriteria');?>",
 				type:"post",
-				data:"tipe="+tipes+"&"+$(this).serialize(),
+				data:datanya,
 				success: function(data){
+					if(data=="true"){
+
 					// console.log(data);
-					Swal.fire(
-					  'Berhasil!',
-					  'Data Kriteria Yang Baru Telah Tersimpan!',
-					  'success'
-					);
-					$('#submit').attr('disabled',false);
-					$('#table-kriteria').DataTable().ajax.reload();
-					$('#table-penilaian').DataTable().ajax.reload();
-					$('#large-Modal').modal('hide');
+						Swal.fire(
+						  'Berhasil!',
+						  'Data Kriteria Yang Baru Telah Tersimpan!',
+						  'success'
+						);
+						$('#submit').attr('disabled',false);
+						$('#table-kriteria').DataTable().ajax.reload();
+						$('#table-penilaian').DataTable().ajax.reload();
+						$('#large-Modal').modal('hide');
+					} else {
+						$('#submit').html("Save");
+						$('#field-kriteria').attr('disabled',false);
+						$('#field-kriteria select').attr('disabled',false);
+						Swal.fire(
+							'Gagal!',
+							'Data yang dikirim salah!',
+							'error'
+						);
+					}
 				}
 			})
 		});
