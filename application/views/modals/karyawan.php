@@ -288,7 +288,6 @@
             e.preventDefault();
             var nik2 = $('#nik').val();
             var nama2 = $('#nama').val();
-						$('#delete').html("<i class='fa fa-spinner fa-pulse'></i> Processing...");
             Swal.fire({
               title: 'Yakin ingin menghapus?',
               html: "Data <strong>"+nama2+"</strong> tidak akan dapat dikembalikan!",
@@ -299,6 +298,7 @@
               reverseButtons: true
             }).then((result) => {
               if (result.value) {
+								$('#delete').html("<i class='fa fa-spinner fa-pulse'></i> Processing...");
 								$('#field-karyawan').attr('disabled',true);
 								$('#field-karyawan select').attr('disabled',true);
                 $.ajax({
