@@ -114,6 +114,13 @@
                 opts.type = "info";
                 break;
 
+                case 'invalid':
+                opts.title = "Error.";
+                opts.text = "Link salah / rusak.";
+                opts.addclass = "stack-custom-top bg-danger";
+                opts.type = "error";
+                break;
+
             }
             new PNotify(opts);
         }
@@ -195,6 +202,7 @@
 
             $('#login-forgot').on('click',function(){
                 field_sign();
+                $('#username').focus();
             });
 
             $('#login-new').on('click',function(){
@@ -561,8 +569,7 @@
         } else {
             $('#signText').html("Success");
             $.growl.notice({ title: "Success!", message: "User found! redirecting...",location:"tc",size:"large" });
-            window.history.replaceState({}, "", "dashboard");
-            window.history.go();
+            location.href = "<?=base_url();?>";
         }
 
        }
@@ -707,9 +714,14 @@
     });
 
     <?php
-        if (isset($loginUlang) && $loginUlang=="stop"){
+        if (isset($loginUlang) && $loginUlang !== null){
+          if($loginUlang=="stop"){
             echo "show_stack_custom_top('login');";
-            $loginUlang = "ulang";
+            $loginUlang = null;
+          } else if($loginUlang=="invalid"){
+            echo "show_stack_custom_top('invalid');";
+            $loginUlang = null;
+          }
         }
     ?>
   })

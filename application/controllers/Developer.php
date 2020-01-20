@@ -13,9 +13,9 @@ class Developer extends CI_Controller {
 	}
 
 	public function index($nama = "")
-	{	
+	{
 		//load session library
- 
+
 		//restrict users to go back to login if session has been set
 		if($this->session->userdata('user')){
 			$data["judul"] = "Developer";
@@ -33,7 +33,7 @@ class Developer extends CI_Controller {
             $data['loginUlang'] = "stop";
             $data['all_karyawan'] = $this->m_karyawan->get_all_karyawan();
             $this->load->view('sign/in',$data);
-        
+
 		}
 
 	}

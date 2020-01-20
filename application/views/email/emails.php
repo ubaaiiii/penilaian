@@ -253,7 +253,7 @@
         	</table>
         	<br>
         	<br>
-        	Untuk masuk ke halaman web,"):("Hai, kak <b>{$nama}</b>. Baru-baru ini akun Anda sedang dipulihkan, Klik tombol berikut untuk mengatur ulang password <br>
+        	Harap ubah Username & Password Anda dengan masuk ke Web Penilaian → Pengaturan → Profile.<br>Klik tombol berikut:"):("Hai, kak <b>{$nama}</b>. Baru-baru ini akun Anda sedang dipulihkan, Klik tombol berikut untuk mengatur ulang password <br>
         	Jika bukan Anda yang melakukannya, abaikan Email ini.");?></span></p>
 </div>
 </div>

@@ -25,7 +25,7 @@ class Forgot extends CI_Controller {
 			$this->load->view('sign/in',$data);
 		} else {
 			$data["judul"] = "Invalid Link";
-      $data['loginUlang'] = "stop";
+      $data['loginUlang'] = "invalid";
       $data['all_karyawan'] = $this->m_karyawan->get_all_karyawan();
       $this->load->view('sign/in',$data);
 		}

@@ -7,6 +7,7 @@ class Cari extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->helper('string');
 		$this->load->model('m_kriteria');
 	}
 
@@ -21,13 +22,12 @@ class Cari extends CI_Controller {
         }
 
 	public function email($tipe=""){
-        	$data['nama'] = $this->input->get('nama');
-                $data['username'] = $this->input->get('username');
-                $data['password'] = $this->input->get('password');
-                $data['email'] = $this->input->get('email');
+        	$data['nama'] = "Rizqi Ubaidillah";
+                $data['username'] = "RIZUBA2308";
+                $data['password'] = "BA2308@!";
+                $data['email'] = "emailnya.ubai@gmail.com";
+                $data['kode'] = random_string('alnum', 32);
                 $data['tipe'] = $tipe;
-                $data['val4'] = "Pulihkan Akun!";
-                $data['val5'] = base_url('pulihkan');
 		$this->load->view('email/emails',$data);
 	}
 
