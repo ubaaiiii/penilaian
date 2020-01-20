@@ -18,11 +18,14 @@
     <meta name="author" content="#">
     <!-- Favicon icon -->
     <link rel="icon" href="<?=base_url('assets\images\favicon BDS.png');?>" type="image/x-icon">
-    <!-- Google font--><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+    <!-- Google font-->
+    <link rel="stylesheet" href="<?= base_url('assets\css\font.css');?>">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="<?=base_url('vendor\bootstrap\css\bootstrap.min.css');?>">
     <!-- Select 2 css -->
     <link rel="stylesheet" type="text/css" href="<?=base_url('vendor\select2\css\select2.min.css');?>">
+    <!-- sweet alert framework -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vendor\sweetalert\css\sweetalert.css');?>">
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets\icon\feather\css\feather.css');?>">
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets\css\font-awesome.min.css');?>">
@@ -517,17 +520,9 @@
     <script type="text/javascript" src="<?= base_url('vendor\select2\js\select2.full.min.js');?>"></script>
     <!-- sweet alert js -->
     <script type="text/javascript" src="<?= base_url('vendor\sweetalert\js\sweetalert.min.js');?>"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script type="text/javascript" src="<?= base_url('vendor\sweetalert\js\sweetalert2.min.js');?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets\js\modal.js');?>"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-23581568-13');
-
-
   $(document).ready(function(){
 
     <?php
@@ -576,7 +571,7 @@
         e.preventDefault();
         var emailR = $("#emailR").val();
         var dataForgot = $(this).serialize();
-        console.log(dataForgot);
+        // console.log(dataForgot);
         $.ajax({
             url: "<?=base_url('forgot/generate');?>",
             type:"post",
@@ -607,7 +602,7 @@
         var datanew = $(this).serialize();
         var pw = $('#new').val();
         var pw1 = $('#new1').val();
-        console.log(datanew);
+        // console.log(datanew);
 
         if (pw!==pw1){
             Swal.fire(
@@ -624,7 +619,7 @@
                 type: "post",
                 data: datanew,
                 success: function(data){
-                    console.log(data);
+                    // console.log(data);
                     if(data=="true"){
                         show_stack_custom_top('newpass');
                         $('#login-new').click();
@@ -645,7 +640,7 @@
             return letter.toUpperCase();
         });
         var dataForm = "tipe=save&role=0&"+$(this).serialize();
-        console.log(dataForm);
+        // console.log(dataForm);
         $('#sendText').disabled = true;
         $('#sendText').html("<i class='fa fa-spinner fa-pulse'></i> Checking...");
         $('#field-register').attr('disabled',true);

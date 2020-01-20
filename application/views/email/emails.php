@@ -134,7 +134,7 @@
 <!--<![endif]-->
 <div align="center" class="img-container center autowidth" style="padding-right: 5px;padding-left: 5px;">
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 5px;padding-left: 5px;" align="center"><![endif]-->
-<div style="font-size:1px;line-height:5px"> </div><a href="<?=base_url();?>" tabindex="-1" target="_blank"> <img align="center" alt="Logo" border="0" class="center autowidth" src="<?=base_url('assets/images/Logo BDS (hitam).png');?>" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; width: 100%; max-width: 180px; display: block;" title="Logo BDS" width="180"/></a>
+<div style="font-size:1px;line-height:5px"> </div><a href="<?=base_url();?>" tabindex="-1" target="_blank"> <img align="center" alt="Logo" border="0" class="center autowidth" src="https://i.ibb.co/dBXgsFL/Logo-BDS-hitam.png" style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; width: 100%; max-width: 180px; display: block;" title="Logo BDS" width="180"/></a>
 <div style="font-size:1px;line-height:5px"> </div>
 <!--[if mso]></td></tr></table><![endif]-->
 </div>
@@ -219,7 +219,7 @@
 <!--<![endif]-->
 <div align="center" class="img-container center autowidth fullwidth" style="padding-right: 15px;padding-left: 30px;">
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 15px;padding-left: 30px;" align="center"><![endif]-->
-<div style="font-size:1px;line-height:15px"> </div><img align="center" alt="Image" border="0" class="center autowidth fullwidth" src="<?=base_url(($tipe=="create")?("assets/images/icon/user.png"):("assets/images/icon/forgot.png"));?>" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 161px; display: block;" title="Images" width="161"/>
+<div style="font-size:1px;line-height:15px"> </div><img align="center" alt="Image" border="0" class="center autowidth fullwidth" src="<?=($tipe=="create")?("https://i.ibb.co/zsRXxfL/user.png"):("https://i.ibb.co/F85SwgV/forgot.png");?>" style="text-decoration: none; -ms-interpolation-mode: bicubic; border: 0; height: auto; width: 100%; max-width: 161px; display: block;" title="Images" width="161"/>
 <div style="font-size:1px;line-height:10px"> </div>
 <!--[if mso]></td></tr></table><![endif]-->
 </div>

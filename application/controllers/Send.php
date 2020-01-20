@@ -15,14 +15,14 @@ class Send extends CI_Controller {
 		$nama = $this->input->post('nama');
 		$nama = explode(' ',trim($nama));
 		if($tipe=="create"){
-	        $data['username'] = $this->input->post('username');
-	        $data['password'] = $this->input->post('password');
+      $data['username'] = $this->input->post('username');
+      $data['password'] = $this->input->post('password');
 		} else {
 			$data['kode'] = $this->input->post('kode');
 		}
 		$data['nama'] = $nama[0];
-        $data['email'] = $this->input->post('email');
-        $data['tipe'] = $tipe;
+    $data['email'] = $this->input->post('email');
+    $data['tipe'] = $tipe;
 
 		$this->email->from('rizqi.ubaidillah15@mhs.ubharajaya.ac.id', 'Rizqi Ubaidillah');
 		$this->email->to($data['email']);
