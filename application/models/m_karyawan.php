@@ -103,6 +103,9 @@ class m_karyawan extends CI_Model
             } else if ($cekUsername !== null and $cekUsername['nik']!==$this->input->post('nik')){
                 return array('hasil'=>'adaUsernames');
             }else {
+                if ($this->input->post('role')==1){
+                  $this->db->delete('list_nilai',array('nik'=>$this->input->post('nik')));
+                }
                 $this->db->where('nik',$this->input->post('nik'));
                 $update = $this->db->update('list_karyawan',$dataBaru);
                 if ($update==true){
