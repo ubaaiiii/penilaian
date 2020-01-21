@@ -1,0 +1,30 @@
+SELECT a.nik,round(round(`K2019002`,3)*8,3) AS K2019002,round(round(`K2019003`,3)*7,3) AS K2019003,round(b.T2019,3) AS T2019,round(round(`K2020001`,3)*9,3) AS K2020001,round(round(`K2020003`,3)*10,3) AS K2020003,round(b.T2020,3) AS T2020 FROM `nilai_preferensi` a
+LEFT JOIN `nilai_terbobot` b on a.nik = b.nik WHERE a.nik in (2019090001,
+2019090002,
+2019090003,
+2019090004,
+2019090005,
+2019090006,
+2019090007,
+2019090008,
+2019090009,
+2019090010
+)
+
+
+UNION
+SELECT "...","...","...","...","...","...","..."
+
+UNION
+SELECT a.nik,round(round(`K2019002`,3)*8,3) AS K2019002,round(round(`K2019003`,3)*7,3) AS K2019003,round(b.T2019,3) AS T2019,round(round(`K2020001`,3)*9,3) AS K2020001,round(round(`K2020003`,3)*10,3) AS K2020003,round(b.T2020,3) AS T2020 FROM `nilai_preferensi` a
+LEFT JOIN `nilai_terbobot` b on a.nik = b.nik WHERE a.nik in (2019090090,
+2019090091,
+2019090092,
+2019090093,
+2019090094,
+2019090095,
+2019090096,
+2019090097,
+2019090098,
+2019090099
+)
