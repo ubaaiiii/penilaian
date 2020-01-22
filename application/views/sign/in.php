@@ -53,6 +53,10 @@
 
     <?php
         $js_karyawan = json_encode($all_karyawan);
+        if(isset($datanya) && !empty($datanya)){
+          $js_detail = json_encode($datanya);
+          echo "<script> var detailnya = {$js_detail} </script>";
+        }
         echo "<script> var karyawan = {$js_karyawan} </script>";
     ?>
 
@@ -634,6 +638,7 @@
                     if(data=="true"){
                         show_stack_custom_top('newpass');
                         $('#login-new').click();
+                        $('#username').val(detailnya.username);
                     }
                 }
             })

@@ -17,11 +17,12 @@ class Forgot extends CI_Controller {
 	{
 		$email = $this->input->get('email');
 		$kode = $this->input->get('kode');
-		if($this->db->get_where('list_karyawan',array('email'=>$email,'recovery'=>$kode))->row_array()){
+		if($datanya = $this->db->get_where('list_karyawan',array('email'=>$email,'recovery'=>$kode))->row_array()){
 			$data['judul'] = "New Password";
 			$data['email'] = $email;
 			$data['all_karyawan'] = $this->m_karyawan->get_all_karyawan();
 			$data['forgot'] = true;
+			$data['datanya'] = $datanya;
 			$this->load->view('sign/in',$data);
 		} else {
 			$data["judul"] = "Invalid Link";
