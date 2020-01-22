@@ -181,10 +181,10 @@
 		$('input[maxlength]').maxlength({
 			threshold: 100
 		});
-        $('textarea[maxlength]').maxlength({
-            threshold: 255
-        })
-        $('input[type="range"]').rangeslider({
+    $('textarea[maxlength]').maxlength({
+        threshold: 255
+    })
+    $('input[type="range"]').rangeslider({
 		    polyfill : false,
 		    onInit : function() {
 		        this.output = $( '<div class="range-output" />' ).insertAfter( this.$range ).html( this.$element.val() );
