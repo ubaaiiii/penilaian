@@ -357,37 +357,37 @@ class M_nilai extends CI_Model
         return $this->db->insert_batch('nilai_terbobot',$datanya);
     }
 
-    function create_rangking()
-    {
-        $num_tahun_kriteria = $this->m_kriteria->get_num_tahun_kriteria();
-        $tahun_kriteria = $this->m_kriteria->get_tahun_kriteria();
-        $attributes = array('ENGINE' => 'InnoDB');
-        $fields = array('nik'  => array('type' => 'VARCHAR', 'constraint' => 10));
-
-        foreach ($tahun_kriteria as $tk) {
-            $fields['R'.$tk['tahun']] = array('type' => 'FLOAT', 'constraint' => 3);
-        }
-
-        $sql = "SELECT `nik`, ";
-        $i=1;
-        foreach ($tahun_kriteria as $tk) {
-            $sql .= "RANK() OVER (ORDER BY `T{$tk['tahun']}` DESC) AS `R{$tk['tahun']}`";
-            if ($i!=$num_tahun_kriteria){
-                $sql .= ",";
-            }
-            $i++;
-        }
-        $sql .= " FROM `nilai_terbobot`";
-
-        $this->dbforge->drop_table('rangking',TRUE);
-        $this->dbforge->add_field($fields);
-        $this->dbforge->add_key('nik', TRUE);
-        $this->dbforge->create_table('rangking', FALSE, $attributes);
-
-        $datanya = $this->db->query($sql)->result_array();
-
-        return $this->db->insert_batch('rangking',$datanya);
-
-    }
+    // function create_rangking()
+    // {
+    //     $num_tahun_kriteria = $this->m_kriteria->get_num_tahun_kriteria();
+    //     $tahun_kriteria = $this->m_kriteria->get_tahun_kriteria();
+    //     $attributes = array('ENGINE' => 'InnoDB');
+    //     $fields = array('nik'  => array('type' => 'VARCHAR', 'constraint' => 10));
+    //
+    //     foreach ($tahun_kriteria as $tk) {
+    //         $fields['R'.$tk['tahun']] = array('type' => 'FLOAT', 'constraint' => 3);
+    //     }
+    //
+    //     $sql = "SELECT `nik`, ";
+    //     $i=1;
+    //     foreach ($tahun_kriteria as $tk) {
+    //         $sql .= "RANK() OVER (ORDER BY `T{$tk['tahun']}` DESC) AS `R{$tk['tahun']}`";
+    //         if ($i!=$num_tahun_kriteria){
+    //             $sql .= ",";
+    //         }
+    //         $i++;
+    //     }
+    //     $sql .= " FROM `nilai_terbobot`";
+    //
+    //     $this->dbforge->drop_table('rangking',TRUE);
+    //     $this->dbforge->add_field($fields);
+    //     $this->dbforge->add_key('nik', TRUE);
+    //     $this->dbforge->create_table('rangking', FALSE, $attributes);
+    //
+    //     $datanya = $this->db->query($sql)->result_array();
+    //
+    //     return $this->db->insert_batch('rangking',$datanya);
+    //
+    // }
 
 }
