@@ -4,7 +4,7 @@
  * www.crudigniter.com
  */
 
-class m_nilai extends CI_Model
+class M_nilai extends CI_Model
 {
     function __construct()
     {
