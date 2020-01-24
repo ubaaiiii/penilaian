@@ -17,7 +17,7 @@ class M_nilai extends CI_Model
     {
         $this->create_nilai_preferensi();
         $this->create_nilai_pivot();
-        $this->create_nilai_terbobot();
+        // $this->create_nilai_terbobot();
         // $this->create_rangking();
     }
 
