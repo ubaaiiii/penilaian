@@ -4,7 +4,7 @@
  * www.crudigniter.com
  */
 
-class m_karyawan extends CI_Model
+class M_karyawan extends CI_Model
 {
     function __construct()
     {
