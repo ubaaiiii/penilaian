@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://ubai.siap-dev.com/';
-$config['site_url'] = 'http://ubai.siap-dev.com/';
+$config['base_url'] = 'http://localhost/penilaian/';
+$config['site_url'] = 'http://localhost/penilaian/';
 
 /*
 |--------------------------------------------------------------------------
